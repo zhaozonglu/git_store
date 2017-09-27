@@ -68,7 +68,7 @@ class Sort{
         $right = $count-1;
         $min = $left;
         $max = $left;
-        while($left<=$right){
+        while($left <= $right){
             $min = $left;
             $max = $left;
             for ($i=$left; $i <= $right; $i++) { 
@@ -220,6 +220,28 @@ class Sort{
             $data[$low] = $temp;
             self::quit_sort($data, $left, $low-1);
             self::quit_sort($data, $low+1, $right);
+        }
+    }
+
+
+    public static function quitSort(&$data, $left, $right){
+        if($left<$right){
+            $low = $left;
+            $right = $right;
+            $temp = $data[$low];
+            while($low<$high){
+                while($low < $high && $data[$high] >= $temp){
+                    $high--;
+                }
+                $data[$low] = $data[$high];
+                while($low < $high && $data[$low] <= $temp){
+                    $low++;
+                }
+                $data[$high] = $data[$low];
+            }
+            $data[$low] = $temp;
+            quitSort($data, $left, $low-1);
+            quitSort($data, $low+1, $right);
         }
     }
 

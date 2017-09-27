@@ -16,8 +16,12 @@ function getMaxSubsum($arr){
     return $maxSum;
 }
 
-$tes = [1,2,-2,1,2,5];
-$s = getMaxSubsum($tes);
-var_dump($s);
-session_start();
-var_dump(session_id());
+// $tes = [1,2,-2,1,2,5];
+// $s = getMaxSubsum($tes);
+// 
+$option = 'f:h:';
+$res = getopt($option);
+var_dump($res);
+
+var_dump($argc);
+var_dump($argv);

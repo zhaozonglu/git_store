@@ -26,6 +26,27 @@ $tree2->right = $tree5;
 $tree3->left = $tree6;
 $tree3->right = $tree7;
 
+// 最小公共祖先
+function commonRoot($root, $p, $q){
+    if($root == null) return null;
+    if($root->data == $p->data || $root->data == $q->data || 
+        ($root->left->data == $p->data && $root->right->data == $q->data) ||
+        ($root->left->data == $q->data && $root->right->data == $p->data)
+    ){
+        return $root;
+    }
+    $leftNode = commonRoot($root->left, $p , $q);
+    $rightNode = commonRoot($root->right, $p, $q);
+    if($leftNode != null && $right != null){
+        return $root;
+    }
+    if($leftNode != null){
+        return $leftNode;
+    }
+    if($right != null){
+        return $rightNode;
+    }
+}
 
 //先根
 function reserv1($tree){
@@ -127,7 +148,10 @@ function lrd($root){
     $pre = null; //上次访问的节点
     while (count($stack)) {
         $temp = getStackTop($stack);
-        if($temp->left && $pre != $temp->left && !($temp->right && $pre == $temp->right)){
+        if($temp->left 
+        && $pre != $temp->left 
+        && !($temp->right && $pre == $temp->right))
+        {
             array_push($stack, $temp->left);
         }else if( $temp->right && $pre != $temp->right){
             array_push($stack, $temp->right);

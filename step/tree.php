@@ -43,9 +43,34 @@ function commonRoot($root, $p, $q){
     if($leftNode != null){
         return $leftNode;
     }
-    if($right != null){
+    if($rightNode != null){
         return $rightNode;
     }
+}
+
+function printLevel($root, $level){
+    if($root == null) return;
+    $queue[] = $root;
+    $level_co = 1;
+    while(count($queue)>0){
+        if($level_co == $level){
+            break;
+        }
+        $count_node = 0;
+        $level_node = count($queue);
+        while ($count_node < $level_node) {
+            $temp = array_shift($queue);
+            if($temp->left != null){
+                array_push($queue, $temp->left);
+            }
+            if($temp->right != null){
+                array_push($queue, $temp->right);
+            }
+            $count_node++;
+        }
+        $level_co++;
+    }
+    var_dump($queue);
 }
 
 //先根
@@ -168,5 +193,5 @@ function getStackTop($stack){
     return $stack[(count($stack)-1)];
 }
 
-$rs = reserv3($tree1);
-var_dump($rs);
+$rs = printLevel($tree1, 3);
+var_dump($rs->data);
